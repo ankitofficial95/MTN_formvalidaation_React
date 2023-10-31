@@ -1,25 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
+import Header from "./components/header";
+import Footer from "./components/footer";
+import RegistrationForm from "./components/registrationForm";
+import Login from "./components/login";
 
-function App() {
+const App = () => {
+  
+  const [showLoginPage, setLoginPage] = useState(false);
+
+  const switchToRegister =()=>{
+    setLoginPage(false)
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header />
+      {showLoginPage ? (
+        <Login setRegister={switchToRegister}/>
+      ) : (
+        <RegistrationForm switchToLogin={() => setLoginPage(true)} />
+      )}
+      <Footer />
     </div>
   );
-}
+};
 
 export default App;
